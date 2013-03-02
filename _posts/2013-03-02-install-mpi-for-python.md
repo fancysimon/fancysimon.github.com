@@ -8,6 +8,9 @@ tags: [MPI,python]
 {% include JB/setup %}
 
 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+
 ## 安装MPICH2
 
 
