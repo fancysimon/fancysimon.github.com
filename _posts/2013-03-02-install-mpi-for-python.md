@@ -7,7 +7,9 @@ tags: [MPI,python]
 ---
 {% include JB/setup %}
 
+
 # 安装MPICH2
+
 
 ## 下载MPICH2
 
@@ -35,6 +37,7 @@ mpiexec -n 2 ./cpi
 </pre>
 运行正常说明MPI安装成功
 
+
 # 安装mpi4py依赖软件
 
 ## 安装libssl（编译mpi4py需要ssl库）
@@ -51,6 +54,7 @@ sudo apt-get install python-dev
 
 http://code.google.com/p/mpi4py/downloads/list
 
+
 # 安装mpi4py
 
 ## 编译安装
@@ -61,7 +65,6 @@ sudo python setup.py install
 
 ## 测试mpi4py
 
-test_mpi.py
 <pre>
 from mpi4py import MPI
 
@@ -84,6 +87,8 @@ mpiexec python -n 2 test_mpi.py
 输出：
 this rank 0
 rank: 1 data: {'a': 7, 'b': 3.1400000000000001}
+
+
 
 # 参考
 http://www.mpich.org/static/docs/guides/mpich2-1.5-installguide.pdf
