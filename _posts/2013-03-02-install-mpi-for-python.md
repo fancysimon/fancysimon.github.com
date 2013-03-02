@@ -19,6 +19,7 @@ tags: [MPI,python]
 http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz
 
 ### 安装MPICH2
+<?prettify?>
 <pre class="prettyprint">
 ./configure  --enable-shared --disable-f77 --disable-fc
 make
@@ -29,12 +30,14 @@ sudo make install
 --disable-f77 --disable-fc 是禁止fortran语言（我的ubuntu上没有fortran）
 
 ### 添加动态库地址
+<?prettify?>
 <pre class="prettyprint">
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 </pre>
 不添加动态库地址，运行mpiexec失败
 
 ### 测试MPI
+<?prettify?>
 <pre class="prettyprint">
 mpiexec -n 2 ./cpi
 </pre>
@@ -44,11 +47,13 @@ mpiexec -n 2 ./cpi
 ## 安装mpi4py依赖软件
 
 ### 安装libssl（编译mpi4py需要ssl库）
+<?prettify?>
 <pre class="prettyprint">
 sudo apt-get install libssl-dev
 </pre>
 
 ### 安装python-dev
+<?prettify?>
 <pre class="prettyprint">
 sudo apt-get install python-dev
 </pre>
@@ -61,6 +66,7 @@ http://code.google.com/p/mpi4py/downloads/list
 ## 安装mpi4py
 
 ### 编译安装
+<?prettify?>
 <pre class="prettyprint">
 python setup.py build
 sudo python setup.py install
@@ -68,6 +74,7 @@ sudo python setup.py install
 
 ### 测试mpi4py
 
+<?prettify?>
 <pre class="prettyprint">
 from mpi4py import MPI
 
