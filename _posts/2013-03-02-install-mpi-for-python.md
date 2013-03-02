@@ -3,7 +3,7 @@ layout: post
 title: "Install MPI for Python"
 description: ""
 category: "Programming"
-tags: [MPI,python]
+tags: [MPI, python]
 ---
 {% include JB/setup %}
 
