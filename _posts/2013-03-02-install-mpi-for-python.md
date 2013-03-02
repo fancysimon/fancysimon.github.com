@@ -8,7 +8,7 @@ tags: [MPI,python]
 {% include JB/setup %}
 
 
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
 
 
 ## 安装MPICH2
