@@ -13,8 +13,8 @@ tags: [MPI, python]
 
 ### 下载MPICH2
 
-[http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz]
-    (http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz)
+[http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz](
+    http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz)
 
 ### 安装MPICH2
 
