@@ -11,28 +11,28 @@ tags: [MPI, python]
 ## 安装MPICH2
 
 
-* 下载MPICH2
+### 下载MPICH2
 
 http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz
 
-* 安装MPICH2
+### 安装MPICH2
 
-        ./configure  --enable-shared --disable-f77 --disable-fc
-        make
-        sudo make install
+    ./configure  --enable-shared --disable-f77 --disable-fc
+    make
+    sudo make install
 
 
 安装MPI4py需要MPICH2的动态库安装 '--enable-shared',
 '--disable-f77 --disable-fc' 是禁止fortran语言（我的ubuntu上没有fortran）
 
 
-* 添加动态库地址
+### 添加动态库地址
 
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 不添加动态库地址，运行mpiexec失败
 
-* 测试MPI
+### 测试MPI
 
     mpiexec -n 2 ./cpi
 
@@ -41,27 +41,27 @@ http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz
 
 ## 安装mpi4py依赖软件
 
-* 安装libssl（编译mpi4py需要ssl库）
+### 安装libssl（编译mpi4py需要ssl库）
 
     sudo apt-get install libssl-dev
 
-* 安装python-dev
+### 安装python-dev
 
     sudo apt-get install python-dev
 
-* 下载mpi4py
+### 下载mpi4py
 
 http://code.google.com/p/mpi4py/downloads/list
 
 
 ## 安装mpi4py
 
-* 编译安装
+### 编译安装
 
     python setup.py build
     sudo python setup.py install
 
-* 测试mpi4py
+### 测试mpi4py
 
     from mpi4py import MPI
 
