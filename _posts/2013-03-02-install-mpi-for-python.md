@@ -51,7 +51,7 @@ tags: [MPI, python]
 
 ### 下载mpi4py
 
-http://code.google.com/p/mpi4py/downloads/list
+[http://code.google.com/p/mpi4py/downloads/list](http://code.google.com/p/mpi4py/downloads/list)
 
 
 ## 安装mpi4py
