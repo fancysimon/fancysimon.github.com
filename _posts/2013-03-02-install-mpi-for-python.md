@@ -40,6 +40,8 @@ tags: [MPI, python]
 
 ### 多机测试MPI
 
+多机测试需要打通ssh信任关系
+
     mpiexec -n 2 -hosts "192.168.1.2,192.168.1.3" ./cpi
 
 
