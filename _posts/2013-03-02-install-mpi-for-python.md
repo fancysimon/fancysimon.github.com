@@ -21,8 +21,10 @@ http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz
         make
         sudo make install
 
+
 安装MPI4py需要MPICH2的动态库安装 '--enable-shared',
 '--disable-f77 --disable-fc' 是禁止fortran语言（我的ubuntu上没有fortran）
+
 
 * 添加动态库地址
 
