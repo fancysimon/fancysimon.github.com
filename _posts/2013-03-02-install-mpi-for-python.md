@@ -38,6 +38,10 @@ tags: [MPI, python]
 
 运行正常说明MPI安装成功
 
+### 多机测试MPI
+
+    mpiexec -n 2 -hosts "192.168.1.2,192.168.1.3" ./cpi
+
 
 ## 安装mpi4py依赖软件
 
