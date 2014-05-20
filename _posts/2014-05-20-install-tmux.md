@@ -10,11 +10,6 @@ tags: [MPI, python]
 
 ## 安装MPICH2
 
-
-### 下载MPICH2
-
-[http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz](http://www.mpich.org/static/tarballs/3.0.2/mpich-3.0.2.tar.gz)
-
 ### 安装MPICH2
 
     ./configure  --enable-shared --disable-f77 --disable-fc
