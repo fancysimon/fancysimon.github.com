@@ -1,93 +1,94 @@
 ---
 layout: post
-title: "Install MPI for Python"
+title: "tmux安装配置"
 description: ""
 category: "Programming"
-tags: [MPI, python]
+tags: [tmux]
 ---
 {% include JB/setup %}
 
 
-## 安装MPICH2
+## tmux安装配置
 
-### 安装MPICH2
+### 下载
 
-    ./configure  --enable-shared --disable-f77 --disable-fc
-    make
-    sudo make install
+tmux依赖libevent 2.0以上版本。
+我这里安装的是tmux 1.9a，libevent是2.0.21版本。
+下载地址如下：
+[http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz](http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz)
+[https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz](https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz)
 
+### 安装libevent
 
-安装MPI4py需要MPICH2的动态库安装 '--enable-shared',
-'--disable-f77 --disable-fc' 是禁止fortran语言（我的ubuntu上没有fortran）
+    tar -zxvf libevent-2.0.21-stable.tar.gz 
+    cd libevent-2.0.21-stable/
+    ./configure
+    make clean && make && sudo make install
 
+此时直接安装tmux会报错，提示找不到libevent库，需要做软连接
 
-### 添加动态库地址
-
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-
-不添加动态库地址，运行mpiexec失败
-
-### 测试MPI
-
-    mpiexec -n 2 ./cpi
-
-运行正常说明MPI安装成功
-
-### 多机测试MPI
-
-多机测试需要打通ssh信任关系
-
-    mpiexec -n 2 -hosts "192.168.1.2,192.168.1.3" ./cpi
+    ln -s /usr/lib64/libevent-2.0.so.5 /usr/local/lib/libevent-2.0.so.5
+    ln -s /usr/lib64/libevent-2.0.so.5 /usr/lib64/libevent.so
 
 
-## 安装mpi4py依赖软件
+### 安装tmux
 
-### 安装libssl（编译mpi4py需要ssl库）
+    tar -zxvf tmux-1.9a.tar.gz
+    cd tmux-1.9a
+    ./configure
+    make clean && make && sudo make install
 
-    sudo apt-get install libssl-dev
+### 配置tmux
 
-### 安装python-dev
+更改默认按键前缀
 
-    sudo apt-get install python-dev
+    set -g prefix ^a
+    unbind ^b
+    bind a send-prefix
 
-### 下载mpi4py
+水平或垂直分割窗口
 
-[http://code.google.com/p/mpi4py/downloads/list](http://code.google.com/p/mpi4py/downloads/list)
+    unbind '"'
+    bind - splitw -v # 分割成上下两个窗口
+    unbind %
+    bind | splitw -h # 分割成左右两个窗口
 
+选择分割的窗格
 
-## 安装mpi4py
+    bind k selectp -U # 选择上窗格
+    bind j selectp -D # 选择下窗格
+    bind h selectp -L # 选择左窗格
+    bind l selectp -R # 选择右窗格
 
-### 编译安装
+重新调整窗格的大小
 
-    python setup.py build
-    sudo python setup.py install
+    bind ^k resizep -U 10 # 跟选择窗格的设置相同，只是多加 Ctrl（Ctrl-k）
+    bind ^j resizep -D 10 # 同上
+    bind ^h resizep -L 10 # ...
+    bind ^l resizep -R 10 # ...
 
-### 测试mpi4py
+交换两个窗格
 
-    from mpi4py import MPI
+    bind ^u swapp -U # 与上窗格交换 Ctrl-u
+    bind ^d swapp -D # 与下窗格交换 Ctrl-d
 
-    comm = MPI.COMM_WORLDrank = comm.Get_rank()
+执行命令，比如看 Manpage、查 Perl 函数
 
-    if rank == 0:
-        data = {'a': 7, 'b': 3.14}
-        comm.send(data, dest=1, tag=11)
+    bind m command-prompt "splitw -h 'exec man %%'"
+    bind @ command-prompt "splitw -h 'exec perldoc -f %%'"
 
-        print "this rank 0"
+复制粘贴操作
+按 C-a [ 进入复制模式，如果有设置 setw -g mode-keys vi 的话，可按 vi 的按键模式操作。移动至待复制的文本处，按一下空格，结合 vi 移动命令开始选择，选好后按回车确认。
+按 C-a ] 粘贴已复制的内容
 
-    elif rank == 1:
-        data = comm.recv(source=0, tag=11)
+    set-option -g status-keys vi                      #操作状态栏时的默认键盘布局；可以设置为vi或emacs
+    set-option -g status-utf8 on                      开启状态栏的UTF-8支持
+    set-window-option -g mode-keys vi    #复制模式中的默认键盘布局；可以设置为vi或emacs
+    set-window-option -g utf8 on         #开启窗口的UTF-8支持
 
-        print "rank:",rank, "data:", data
+### 使用
 
-    mpiexec python -n 2 test_mpi.py
-
-输出：
-
-    this rank 0
-    rank: 1 data: {'a': 7, 'b': 3.1400000000000001}
-
-
-## 参考
-
-[http://www.mpich.org/static/docs/guides/mpich2-1.5-installguide.pdf](http://www.mpich.org/static/docs/guides/mpich2-1.5-installguide.pdf)
-[http://mpi4py.scipy.org/docs/usrman/index.html](http://mpi4py.scipy.org/docs/usrman/index.html)
+    tmux new -s session
+    tmux new -s session -d #在后台建立会话
+    tmux ls #列出会话
+    tmux attach -t session #进入某个会话
